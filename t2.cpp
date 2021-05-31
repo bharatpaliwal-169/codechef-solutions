@@ -1,23 +1,68 @@
-#include<bits/stdc++.h>
-using namespace std;
+#include <bits/stdc++.h> 
+using namespace std; 
 #define L long long int
-int main()
+
+int main() 
 {
   int t;
-  L C,d;
   cin >> t;
-  while (t--)
+
+  L n,m,k;
+  L k_count = 0;
+  while(t--)
   {
-    cin >> C;
-    d = (log2(C));
+    cin >> n >> m >> k;
+    L matrix[n+1][m+1];
+    for(L i=0; i<=n; i++)
+    {
+      for(L j=0; j<=m; j++)
+      {
+        if(i==0||j==0){
+          matrix[i][j]=0;
+        }
+        else
+          cin >> matrix[i][j];
+      }
+    }
 
-    // cout << d << endl;
+    for(L i=0; i<=n; i++)
+    {
+      L pre = 0;
+      for(L j=0; j<=m; j++)
+      {  
+        matrix[i][j] += pre;
+        pre = matrix[i][j];
+      }
+    }
+    for(L j=0; j<=m; j++)
+    {
+      L pre = 0;
+      for(L i=0; i<=n; i++)
+      {  
+        matrix[i][j] += pre;
+        pre = matrix[i][j];
+      }
+    }
+    L z=0;
+    if(n<m)
+    {
+      z = n;
+    }
+    else{
+      z=m;
+    }
 
-    L b = pow(2,d) - 1;
-    L a = C ^ b;
-
-    L max_product = a*b;
-  
-    cout << max_product << endl;
+    for(L len=1;len<=z; len++){
+      for(L i=len;i<=n;i++){
+        for(L j=len; j<=m; j++){
+          if((matrix[i][j] + matrix[i-len][j-len] -
+              matrix[i][j-len] - matrix[i-len][j]) / (len*len) >= k){
+                k_count++;
+              }
+        }
+      }
+    }
+    cout << k_count << endl;
   }
-}
+  return 0; 
+} 
