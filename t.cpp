@@ -1,56 +1,69 @@
-#include <bits/stdc++.h> 
-using namespace std; 
-#define ull unsigned long long int
-int decimalToBinary(int N)
-{
-    ull B_Number = 0;
-    ull cnt = 0;
-    while (N != 0) {
-        ull rem = N % 2;
-        ull c = pow(10, cnt);
-        B_Number += rem * c;
-        N /= 2;
-        cnt++;
-    }
-    return B_Number;
-}
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long int
 
-bool isSubSequence(string str1 , string str2)
+int main()
 {
-  ull m = str1.length();
-  ull n = str2.length();
-  ull j = 0;
-  for (ull i = 0; i < n && j < m; i++)
-      if (str1[j] == str2[i])
-          j++;
-  return (j == m);
-}
-
-int main() 
-{
-  int t;
-  cin >> t;
-  
-  while(t--)
+	ios_base::sync_with_stdio(false);
+	cin.tie(NULL);
+	
+  int t;cin >> t;
+  ll N,M;
+  while (t--)
   {
-    string input;
-    cin >> input;
-    int x = -1;
-    while(true)
-    {
-      x++;
-      cout << x << endl;
-      ull binary_x = decimalToBinary(x);
-      cout << binary_x << endl;
-      string sub_x = to_string(binary_x);
-      
-      // cout << sub_x << endl;
+    cin >> N >> M;
+    ll destination[N + 1],passanger[M + 1];
+    ll result[M] = {0};
 
-      if(!(isSubSequence(sub_x , input )) ){
-        cout << sub_x << endl;
-        break;
-      }
+    //input
+    for(ll i = 1; i <= N; i++)
+    {
+      cin >> destination[i];
     }
+    for(ll i = 1; i <= M; i++)
+    {
+      cin >> passanger[i];
+    }
+    //process
+    for (ll l = 1; l <=  M; l++){
+      if(destination[passanger[l]] != 0){
+        result[l] = 0;
+      }
+
+      if(destination[passanger[l]] == 0){
+        ll i = passanger[l],j = passanger[l];
+        
+        if(destination[i] == destination[N] || destination[i] == destination[1]){
+          result[l] = 0;
+          break;
+        }
+        while (i--,j++)
+        {
+          if(destination[i] == 1)
+          {
+            result[l] = abs(passanger[l] - i);
+            break;
+          }
+          else if(destination[j] == 2)
+          {
+            result[l] = abs(passanger[l] - j);
+            break;
+          }
+          else{
+            if(i == 0 || j == N){
+              result[l] = -1;
+              break;
+            }
+          }
+        }
+      
+      }  
+    }
+
+    for(int i =1 ; i <= M; i++){
+      cout << result[i] << " ";
+    }
+    cout << endl;
   }
-  return 0; 
-} 
+	return 0;
+}
