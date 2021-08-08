@@ -1,9 +1,9 @@
-try:
-  mod = 1000000007
-  for i in range(int(input())):
-    a,b = map(int,input().split())
-    c = pow(2,a,mod)-1
-    print(pow(c,b,mod))
+# cook your dish here
+t = int(input())
+while (t):
+    x,y = map(int, input().split())
+    s = 6 - (x+y)
+    a = s/6.000000
+    print('%.6f'%a)
+    t-=1
 
-except:
-	pass
