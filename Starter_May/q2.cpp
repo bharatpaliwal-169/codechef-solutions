@@ -12,14 +12,20 @@ void test(int K)
         {
             for(int j=1;j<s.length();j++)
             {
-                if(s[j]<'a' || s[j]>'m') {c="NO";exit;}
+                if(s[j]<'a' || s[j]>'m') {
+                  c="NO";
+                  exit;
+                }
             }
         }
         else if(s[0]>='N' && s[0]<='Z')
         {
             for(int j=1;j<s.length();j++)
             {
-                if(s[j]<'N' || s[j]>'Z') {c="NO";exit;}
+                if(s[j]<'N' || s[j]>'Z') {
+                  c="NO";
+                  exit;
+                }
             }
         }
         else c="NO";
