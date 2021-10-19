@@ -7,7 +7,9 @@ int main() {
     while(t--){
         int x,m,d;
         cin >> x >> m >> d;
-        int res = min(x*m , x+d);
+        int a = x*m;
+        int b = x+d;
+        int res = min(a, b);
         cout << res << endl;
     }
 	return 0;
